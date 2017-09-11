@@ -1,0 +1,6 @@
+framework module Pods_bean_swift_w_sdk {
+  umbrella header "Pods-bean_swift_w_sdk-umbrella.h"
+
+  export *
+  module * { export * }
+}

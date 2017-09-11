@@ -1,0 +1,7 @@
+use_frameworks!
+
+target 'bean_swift_w_sdk' do
+
+	pod 'Bean-iOS-OSX-SDK'
+
+end
