@@ -299,7 +299,7 @@ typedef NS_ENUM(NSUInteger, BeanBluetoothError) {
  *  A serious error has occurred that Bean can't resolve. The client must resolve this issue.
  *
  *  @param bean The Bean that encountered this issue
- *  @param bluetoothError a BeanBluetoothError indicating what went wrong
+ *  @param error a BeanBluetoothError indicating what went wrong
  */
 - (void)bean:(PTDBean *)bean bluetoothError:(BeanBluetoothError)error;
 
