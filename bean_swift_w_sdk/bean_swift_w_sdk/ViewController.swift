@@ -13,8 +13,12 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     
     // Declare variables we will use throughout the app
     var beanManager: PTDBeanManager?
-    var device: PTDBean?
+    var yourBean: PTDBean?
     
+    var tempRepeat: Timer!
+    
+    // After view is loaded into memory, we create an instance of PTDBeanManager
+    // and assign ourselves as the delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         beanManager = PTDBeanManager()
@@ -28,10 +32,15 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     
     // Bean SDK: We check to see if Bluetooth is on.
     func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
+//        let scanError: NSError?
         
         if beanManager!.state == BeanManagerState.poweredOn {
             startScanning()
-            print("Bean found")
+//            if let e = scanError {
+//                print(e)
+//            } else {
+//                print("Please turn on your Bluetooth")
+//            }
         }
     }
     
@@ -39,41 +48,43 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     func startScanning() {
         var error: NSError?
         beanManager!.startScanning(forBeans_error: &error)
-        if error != nil {
-            
+        if let e = error {
+            print(e)
         }
     }
     
+    // We connect to a specific Bean
     func beanManager(_ beanManager: PTDBeanManager!, didDiscover bean: PTDBean!, error: Error!) {
-        if (bean.name == "Bean") {
-            device = bean
-            connectToDevice(device!)
-            print("Connected to Bean")
-        } else {
-            print("Did not connect to Bean")
+        if let e = error {
+            print(e)
+        }
+        
+        print("Found a Bean: \(bean.name)")
+        if bean.name == "Bean" {
+            yourBean = bean
+            print("got your bean")
+            connectToBean(bean: yourBean!)
         }
     }
     
-    func connectToDevice(_ device: PTDBean) {
+    // Bean SDK: connects to Bean
+    func connectToBean(bean: PTDBean) {
         var error: NSError?
-        beanManager!.connect(to: device, withOptions: nil, error: &error)
+        beanManager!.connect(to: bean, withOptions: nil, error: &error)
     }
-
-//
-//    // Change LED text when button is pressed
-//    func updateLedStatusText(lightState: Bool) {
-//        let onOffText = lightState ? "ON" : "OFF"
-//        ledTextLabel.text = "Led is: \(onOffText)"
-//    }
-//    
-//    // Mark: Actions
-//    // When we pressed the button, we change the light state and
-//    // We update date the label, and send the Bean serial data
-//    @IBAction func pressMeButtonToToggleLED(sender: AnyObject) {
-//        lightState = !lightState
-//        updateLedStatusText(lightState)
-//        let data = NSData(bytes: &lightState, length: sizeof(Bool))
-//        sendSerialData(data)
-//        
-//    }
+    
+    func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
+        tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+    }
+    
+    func runTimedCode() {
+        yourBean?.readTemperature()
+    }
+    
+    func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
+        print("Temp")
+        print(degrees_celsius)
+        bean.readTemperature()
+    }
 }
+
