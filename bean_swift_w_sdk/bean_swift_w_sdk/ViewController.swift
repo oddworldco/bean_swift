@@ -60,7 +60,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
         }
         
         print("Found a Bean: \(bean.name)")
-        if bean.name == "Bean" {
+        if bean.name == "gaby_bean" {
             yourBean = bean
             print("got your bean")
             connectToBean(bean: yourBean!)
