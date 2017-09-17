@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bean_swift_w_sdk/ViewController.swift"
-            timestampString = "527299624.91134"
+            timestampString = "527377102.967889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bean_swift_w_sdk/ViewController.swift"
-            timestampString = "527299624.91134"
+            timestampString = "527378554.217529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -54,17 +54,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "bean_swift_w_sdk/ViewController.swift"
-            timestampString = "527299624.91134"
+            timestampString = "527378554.217529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "postRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bean_swift_w_sdk/ViewController.swift"
+            timestampString = "527378554.217529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "postRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bean_swift_w_sdk.ViewController.postRequest () -&gt; ()"
+                  moduleName = "bean_swift_w_sdk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/grf-homechef/Dev/gaby/bean_swift_w_sdk/bean_swift_w_sdk/bean_swift_w_sdk/ViewController.swift"
+                  timestampString = "527378145.745859"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "1620">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "bean_swift_w_sdk.ViewController.(postRequest () -&gt; ()).(closure #1)"
+                  moduleName = "bean_swift_w_sdk"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/grf-homechef/Dev/gaby/bean_swift_w_sdk/bean_swift_w_sdk/bean_swift_w_sdk/ViewController.swift"
+                  timestampString = "527378145.749683"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
