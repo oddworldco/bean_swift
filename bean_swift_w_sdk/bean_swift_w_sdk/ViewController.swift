@@ -86,11 +86,11 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     }
     
     func runTimedCode() {
-        print("hello2323123!")
+        print(yourBean)
         yourBean?.readTemperature()
     }
     
-    func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
+    func getbeanTemp(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print("Temp")
         print(degrees_celsius)
         bean.readTemperature()
