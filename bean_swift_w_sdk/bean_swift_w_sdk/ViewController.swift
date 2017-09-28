@@ -73,6 +73,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
+        createObj(temp: degrees_celsius)
     }
     
     
@@ -83,27 +84,31 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     }
     
     //post request:
+    func createObj(temp: NSNumber!) {
+        let temp = temp
+        print("DATA!")
+        //postRequest(temp: temp)
+    }
     
-    func postRequest() {
+    func postRequest(temp: NSNumber!) {
         print("post request!!!!!!!!!")
         
         let customer = [
             "uuid": "uuid",
             "timeStamp": "currentDate",
-            "data": "data",
+            "temp": temp,
             ] as [String: Any]
         // "https://oddworld.herokuapp.com/collect_data"
-        
         var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/collect_data")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: customer, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
-        
-        
+
+
         print("begin urlsession")
-        
+
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
             print("*************")
@@ -112,7 +117,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             } else {
                 do {
                     guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                    
+
                     guard let errors = json?["errors"] as? [[String: Any]] else { return }
                     if errors.count > 0 {
                         // show error
