@@ -2,51 +2,37 @@
 //  ViewController.swift
 //  bean_swift_w_sdk
 //
-//  Created by Gaby Ruiz-Funes on 9/17/17.
-//  Copyright © 2017 Odd World Co. All rights reserved.
-//
-
 import UIKit
 import Bean_iOS_OSX_SDK
 
-class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate  {
+class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate {
     
     // Declare variables we will use throughout the app
     var beanManager: PTDBeanManager?
-    var yourBean: PTDBean?
-    
-    var tempRepeat: Timer!
+    var connectedBean: PTDBean?
     
     // After view is loaded into memory, we create an instance of PTDBeanManager
     // and assign ourselves as the delegate
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         beanManager = PTDBeanManager()
         beanManager!.delegate = self
     }
     
-    // After the view is added we will start scanning for Bean peripherals
-    override func viewDidAppear(_ animated: Bool) {
-        startScanning()
-    }
-    
     // Bean SDK: We check to see if Bluetooth is on.
     func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
-//        let scanError: NSError?
-        
         if beanManager!.state == BeanManagerState.poweredOn {
             startScanning()
-//            if let e = scanError {
-//                print(e)
-//            } else {
-//                print("Please turn on your Bluetooth")
-//            }
+        } else if beanManager!.state == BeanManagerState.poweredOff {
+            print("Please turn on your bluetooth")
         }
     }
     
-    // Scan for Beans
+    // Scan for Peripherals
     func startScanning() {
         var error: NSError?
+        
         beanManager!.startScanning(forBeans_error: &error)
         if let e = error {
             print(e)
@@ -59,45 +45,44 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             print(e)
         }
         
-        print("Found a Bean: \(bean.name)")
-        if bean.name == "gaby_bean" {
-            yourBean = bean
-            print("got your bean")
-            connectToBean(bean: yourBean!)
-            //sendButtonTapped(sender: "test" as AnyObject);
-            }
-        //postRequest()
+        if bean.name == "Bean" {
+            connectedBean = bean
+            print("Discovered your Bean: \(bean.name)")
+            connectToBean(bean: connectedBean!)
+        }
     }
     
-    // Bean SDK: connects to Bean
+    // Connects to Bean
     func connectToBean(bean: PTDBean) {
         var error: NSError?
         beanManager!.connect(to: bean, withOptions: nil, error: &error)
     }
     
+    // Bean SDK: After connecting to Bean
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
-        print("bean Manager called")
-        tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        print("bean manager called")
+        self.connectedBean = bean
+        self.connectedBean?.delegate = self
+        
+        self.connectedBean?.readAccelerationAxes()
+        self.connectedBean?.readTemperature()
+        self.connectedBean?.readBatteryVoltage()
+        
+        //self.connectedBean?.readScratchBank(Int)
     }
     
-    func beanTemp(_ beanManager: PTDBeanManager!, didUpdateTemperature degrees_celsius: NSNumber!, error: Error!) {
-        print("hello2323123!")
-
-    }
-    
-    func runTimedCode() {
-        print(yourBean)
-        yourBean?.readTemperature()
-    }
-    
-    func getbeanTemp(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
-        print("Temp")
+    func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
-        bean.readTemperature()
+    }
+    
+    
+    func bean(_ bean: PTDBean!, didUpdateAccelerationAxes acceleration: PTDAcceleration) {
+        
+        // Show acceleration
+        print( "X: \(acceleration.x); Y: \(acceleration.y); Z: \(acceleration.z)" )
     }
     
     //post request:
-    
     
     func postRequest() {
         print("post request!!!!!!!!!")
@@ -140,5 +125,16 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             print("******************************")
         }).resume()
     }
+    
+    //scan for all beans available
+    //update UI with available beans
+    //update code with selected bean
+    //connect to selected bean
+    
+    //request scratch data
+    //
+    //collect temp and accel into an object
+    //send to databse
+    
 }
 
