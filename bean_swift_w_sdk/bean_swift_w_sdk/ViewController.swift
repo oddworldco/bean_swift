@@ -31,6 +31,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     
     // Scan for Peripherals
     func startScanning() {
+        print("start scanning")
         var error: NSError?
         
         beanManager!.startScanning(forBeans_error: &error)
@@ -45,7 +46,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             print(e)
         }
         
-        if bean.name == "Bean" {
+        if bean.name == "bean_2" { //TODO: change this to dynamically update based on available beans
             connectedBean = bean
             print("Discovered your Bean: \(bean.name)")
             connectToBean(bean: connectedBean!)
@@ -64,12 +65,24 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
         self.connectedBean = bean
         self.connectedBean?.delegate = self
         
+        self.connectedBean?.readScratchBank(1)
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readTemperature()
         self.connectedBean?.readBatteryVoltage()
         
         //self.connectedBean?.readScratchBank(Int)
     }
+    
+    func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data) {
+        print("found scratch!")
+        print(data)
+        let data = Data(bytes: [0x71, 0x3d, 0x0a, 0xd7, 0xa3, 0x10, 0x45, 0x40])
+        let value: Double = data.withUnsafeBytes { $0.pointee }
+        print(value)
+        
+    }
+    
+    
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
@@ -105,10 +118,10 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
-
-
+        
+        
         print("begin urlsession")
-
+        
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
             print("*************")
@@ -117,7 +130,7 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             } else {
                 do {
                     guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-
+                    
                     guard let errors = json?["errors"] as? [[String: Any]] else { return }
                     if errors.count > 0 {
                         // show error
@@ -140,6 +153,12 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     //
     //collect temp and accel into an object
     //send to databse
+    
+    
+    
+    
+    //create service function that gets user data to define object we're posting to
+    
     
 }
 
