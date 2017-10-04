@@ -10,6 +10,9 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     // Declare variables we will use throughout the app
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
+    var tempRepeat: Timer!
+    var connected: Bool
+
     
     // After view is loaded into memory, we create an instance of PTDBeanManager
     // and assign ourselves as the delegate
@@ -60,25 +63,31 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     }
     
     // Bean SDK: After connecting to Bean
+
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
+        tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+
         print("bean manager called")
-        self.connectedBean = bean
+     }
+    
+    func runTimedCode() {
+        //self.connectedBean = bean
         self.connectedBean?.delegate = self
         
         self.connectedBean?.readScratchBank(1)
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readTemperature()
         self.connectedBean?.readBatteryVoltage()
-        
-        //self.connectedBean?.readScratchBank(Int)
     }
     
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data) {
+        print("********************************")
         print("found scratch!")
         print(data)
         let data = Data(bytes: [0x71, 0x3d, 0x0a, 0xd7, 0xa3, 0x10, 0x45, 0x40])
         let value: Double = data.withUnsafeBytes { $0.pointee }
         print(value)
+        print("********************************")
         
     }
     
@@ -93,7 +102,9 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     func bean(_ bean: PTDBean!, didUpdateAccelerationAxes acceleration: PTDAcceleration) {
         
         // Show acceleration
+        print( "********************************")
         print( "X: \(acceleration.x); Y: \(acceleration.y); Z: \(acceleration.z)" )
+        print( "********************************")
     }
     
     //post request:
