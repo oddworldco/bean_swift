@@ -121,6 +121,7 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
         createObj(temp: degrees_celsius)
+        self.tempOutput.text = degrees_celsius.stringValue
     }
     
     
