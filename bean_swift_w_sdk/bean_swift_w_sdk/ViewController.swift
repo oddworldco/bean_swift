@@ -5,14 +5,31 @@
 import UIKit
 import Bean_iOS_OSX_SDK
 
-class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate {
+class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate {
     
     // Declare variables we will use throughout the app
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
-    var connected: Bool
-
+    
+    
+    //store bean name using core data
+    
+    // Create UI variables
+    @IBOutlet weak var beanName: UITextField!
+    
+    @IBOutlet weak var tempOutput: UILabel!
+    
+    @IBAction func connect(_ sender: Any) {
+        startScanning()
+        print("SCANNING!!!!!")
+    }
+    
+    @IBAction func disconnect(_ sender: Any) {
+        beanManager?.disconnectBean(connectedBean, error: nil)
+    }
+    
+    @IBOutlet weak var nameText: UILabel!
     
     // After view is loaded into memory, we create an instance of PTDBeanManager
     // and assign ourselves as the delegate
@@ -24,13 +41,13 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     }
     
     // Bean SDK: We check to see if Bluetooth is on.
-    func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
-        if beanManager!.state == BeanManagerState.poweredOn {
-            startScanning()
-        } else if beanManager!.state == BeanManagerState.poweredOff {
-            print("Please turn on your bluetooth")
-        }
-    }
+//    func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
+//        if beanManager!.state == BeanManagerState.poweredOn {
+//            startScanning()
+//        } else if beanManager!.state == BeanManagerState.poweredOff {
+//            print("Please turn on your bluetooth")
+//        }
+//    }
     
     // Scan for Peripherals
     func startScanning() {
@@ -49,7 +66,10 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
             print(e)
         }
         
-        if bean.name == "bean_2" { //TODO: change this to dynamically update based on available beans
+        print("LOOKING FOR:")
+        print(beanName.text)
+
+        if bean.name == beanName.text! { //TODO: change this to dynamically update based on available beans
             connectedBean = bean
             print("Discovered your Bean: \(bean.name)")
             connectToBean(bean: connectedBean!)
@@ -78,6 +98,11 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readTemperature()
         self.connectedBean?.readBatteryVoltage()
+    }
+    
+    func beanManager(_ beanManager: PTDBeanManager!, didDisconnectBean bean: PTDBean!, error: Error!) {
+        self.connectedBean = nil
+        print("Disconnected")
     }
     
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data) {
@@ -169,7 +194,9 @@ class ViewController: UIViewController, PTDBeanManagerDelegate, PTDBeanDelegate 
     
     
     //create service function that gets user data to define object we're posting to
-    
-    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+    }
 }
 
