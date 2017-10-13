@@ -5,24 +5,29 @@
 import UIKit
 import Bean_iOS_OSX_SDK
 
-class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate {
+class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDelegate, PTDBeanDelegate {
     
     // Declare variables we will use throughout the app
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
     
+    // Create UI variables
+
+    @IBOutlet weak var promptText: UILabel!
     
     //store bean name using core data
-    
-    // Create UI variables
     @IBOutlet weak var beanName: UITextField!
     
     @IBOutlet weak var tempOutput: UILabel!
-    
+
     @IBAction func connect(_ sender: Any) {
-        startScanning()
-        print("SCANNING!!!!!")
+        if beanName.text == ""  {
+            promptText.text = "Please enter name to connect"
+        } else {
+            startScanning()
+            print("SCANNING!!!!!")
+        }
     }
     
     @IBAction func disconnect(_ sender: Any) {
@@ -38,7 +43,16 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
         
         beanManager = PTDBeanManager()
         beanManager!.delegate = self
+        beanName.delegate = self
     }
+    
+    // hide keypad on enter:
+    func textFieldShouldReturn(_ beanName: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    
     
     // Bean SDK: We check to see if Bluetooth is on.
 //    func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
@@ -58,6 +72,7 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
         if let e = error {
             print(e)
         }
+        
     }
     
     // We connect to a specific Bean
@@ -68,12 +83,13 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
         
         print("LOOKING FOR:")
         print(beanName.text)
-
+        
         if bean.name == beanName.text! { //TODO: change this to dynamically update based on available beans
             connectedBean = bean
             print("Discovered your Bean: \(bean.name)")
             connectToBean(bean: connectedBean!)
         }
+        promptText.text = "Searching..."
     }
     
     // Connects to Bean
@@ -85,6 +101,8 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
     // Bean SDK: After connecting to Bean
 
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
+        self.promptText.text = "Smarty Pants Connected to:"
+        
         tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
 
         print("bean manager called")
@@ -103,6 +121,9 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
     func beanManager(_ beanManager: PTDBeanManager!, didDisconnectBean bean: PTDBean!, error: Error!) {
         self.connectedBean = nil
         print("Disconnected")
+        promptText.text = "Enter your device name:"
+        beanName.text = ""
+        tempOutput.text = "Loading..."
     }
     
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data) {
@@ -180,16 +201,6 @@ class ViewController: UIViewController,  PTDBeanManagerDelegate, PTDBeanDelegate
             print("******************************")
         }).resume()
     }
-    
-    //scan for all beans available
-    //update UI with available beans
-    //update code with selected bean
-    //connect to selected bean
-    
-    //request scratch data
-    //
-    //collect temp and accel into an object
-    //send to databse
     
     
     
