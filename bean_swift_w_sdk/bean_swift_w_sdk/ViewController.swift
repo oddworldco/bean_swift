@@ -11,6 +11,8 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
+    var someData = [NSString]()
+    var batteryLevel: Int = 0
     
     // Create UI variables
 
@@ -102,7 +104,6 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
 
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
         self.promptText.text = "Smarty Pants Connected to:"
-        
         tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
 
         print("bean manager called")
@@ -112,10 +113,17 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         //self.connectedBean = bean
         self.connectedBean?.delegate = self
         
+        someData.append("'name': '\(beanName.text!)' " as NSString)
+        someData.append("'timeStamp': '\(Date())'}" as NSString)
+        someData.append("'volts':'\(self.connectedBean?.readBatteryVoltage())'" as NSString)
+        
         self.connectedBean?.readScratchBank(1)
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readTemperature()
         self.connectedBean?.readBatteryVoltage()
+
+        postRequest(data: someData)
+        someData = []
     }
     
     func beanManager(_ beanManager: PTDBeanManager!, didDisconnectBean bean: PTDBean!, error: Error!) {
@@ -127,59 +135,65 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     }
     
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data) {
-        print("********************************")
-        print("found scratch!")
-        print(data)
+//        print("********************************")
+//        print("found scratch!")
+//        print(data)
         let data = Data(bytes: [0x71, 0x3d, 0x0a, 0xd7, 0xa3, 0x10, 0x45, 0x40])
         let value: Double = data.withUnsafeBytes { $0.pointee }
-        print(value)
-        print("********************************")
-        
+//        print(value)
+        someData.append("{'bodyTemp': '\(value)'" as NSString)
+//        print("********************************")
     }
     
-    
+    func bean(_ bean: PTDBean!, beanDidUpdateBatteryVoltage error:NSError) {
+        print("batteryVoltage")
+    }
+
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
-        createObj(temp: degrees_celsius)
+        someData.append("'beanTemp': '\(degrees_celsius!)'}" as NSString)
         self.tempOutput.text = degrees_celsius.stringValue
     }
     
     
     func bean(_ bean: PTDBean!, didUpdateAccelerationAxes acceleration: PTDAcceleration) {
-        
+        someData.append("'X': '\(acceleration.x)', 'Y': '\(acceleration.y)', 'Z': '\(acceleration.z)'"as NSString)
         // Show acceleration
-        print( "********************************")
-        print( "X: \(acceleration.x); Y: \(acceleration.y); Z: \(acceleration.z)" )
-        print( "********************************")
+//        print( "********************************")
+//        print( "X: \(acceleration.x); Y: \(acceleration.y); Z: \(acceleration.z)" )
+//        print( "********************************")
     }
     
     //post request:
-    func createObj(temp: NSNumber!) {
-        let temp = temp
-        print("DATA!")
-        //postRequest(temp: temp)
-    }
+//    func createObj(temp: NSNumber!) {
+//        let temp = temp
+//        print("DATA!")
+//        //postRequest(temp: temp)
+//    }
     
-    func postRequest(temp: NSNumber!) {
+    func postRequest(data: [NSString]) {
         print("post request!!!!!!!!!")
         
-        let customer = [
-            "uuid": "uuid",
-            "timeStamp": "currentDate",
-            "temp": temp,
-            ] as [String: Any]
+        print("SOMEDATA")
+        print(data)
+        
+//        let data = [
+//            "uuid": "uuid",
+//            "timeStamp": "currentDate",
+//            "temp": temp,
+//            ] as [String: Any]
         // "https://oddworld.herokuapp.com/collect_data"
         var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/collect_data")!)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONSerialization.data(withJSONObject: customer, options: [])
+        request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
-        
-        
+
+
         print("begin urlsession")
-        
+
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
             print("*************")
@@ -188,7 +202,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
             } else {
                 do {
                     guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                    
+
                     guard let errors = json?["errors"] as? [[String: Any]] else { return }
                     if errors.count > 0 {
                         // show error
