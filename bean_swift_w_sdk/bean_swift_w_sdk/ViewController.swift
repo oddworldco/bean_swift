@@ -104,7 +104,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
 
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
         self.promptText.text = "Smarty Pants Connected to:"
-        tempRepeat = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        tempRepeat = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
 
         print("bean manager called")
      }
