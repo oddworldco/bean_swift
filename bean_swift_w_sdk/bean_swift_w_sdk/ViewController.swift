@@ -115,7 +115,6 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         
         someData.append("'name': '\(beanName.text!)' " as NSString)
         someData.append("'timeStamp': '\(Date())'}" as NSString)
-        someData.append("'volts':'\(self.connectedBean?.readBatteryVoltage())'" as NSString)
         
         self.connectedBean?.readScratchBank(1)
         self.connectedBean?.readAccelerationAxes()
@@ -145,7 +144,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
 //        print("********************************")
     }
     
-    func bean(_ bean: PTDBean!, beanDidUpdateBatteryVoltage error:NSError) {
+    func bean(_ bean: PTDBean!, beanDidUpdateBatteryVoltage batteryVoltage: NSNumber) {
         print("batteryVoltage")
     }
 
@@ -184,7 +183,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
 //            "temp": temp,
 //            ] as [String: Any]
         // "https://oddworld.herokuapp.com/collect_data"
-        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/collect_data")!)
+        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/ios_data")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -197,21 +196,21 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
             print("*************")
-            if error != nil {
-                print(error)
-            } else {
-                do {
-                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-
-                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
-                    if errors.count > 0 {
-                        // show error
-                        return
-                    } else {
-                        // show confirmation
-                    }
-                }
-            }
+//            if error != nil {
+//                print(error)
+//            } else {
+//                do {
+//                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+//
+//                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
+//                    if errors.count > 0 {
+//                        // show error
+//                        return
+//                    } else {
+//                        // show confirmation
+//                    }
+//                }
+//            }
             print("******************************")
         }).resume()
     }
