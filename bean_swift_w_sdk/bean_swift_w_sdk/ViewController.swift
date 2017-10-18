@@ -11,8 +11,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
-    var someData = [NSString]()
+//    var someData = [NSArray]()
     var batteryLevel: Int = 0
+    var someData: [String: Any] = [:]
+
     
     // Create UI variables
 
@@ -112,18 +114,16 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     func runTimedCode() {
         //self.connectedBean = bean
         self.connectedBean?.delegate = self
-        
-        someData.append("'name': '\(beanName.text!)' " as NSString)
-        someData.append("'timeStamp': '\(Date())'}" as NSString)
-        someData.append("'volts':'\(self.connectedBean?.readBatteryVoltage())'" as NSString)
+                someData["name"] = beanName.text!
+        someData["timeStamp"] = Date()
         
         self.connectedBean?.readScratchBank(1)
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readTemperature()
-        self.connectedBean?.readBatteryVoltage()
-
+        //self.connectedBean?.readBatteryVoltage()
+        print(someData);
         postRequest(data: someData)
-        someData = []
+        //someData = [:]
     }
     
     func beanManager(_ beanManager: PTDBeanManager!, didDisconnectBean bean: PTDBean!, error: Error!) {
@@ -141,7 +141,8 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         let data = Data(bytes: [0x71, 0x3d, 0x0a, 0xd7, 0xa3, 0x10, 0x45, 0x40])
         let value: Double = data.withUnsafeBytes { $0.pointee }
 //        print(value)
-        someData.append("{'bodyTemp': '\(value)'" as NSString)
+        someData["bodyTemp"] = value
+
 //        print("********************************")
     }
     
@@ -152,13 +153,17 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
         print(degrees_celsius)
-        someData.append("'beanTemp': '\(degrees_celsius!)'}" as NSString)
+        
+        someData["beanTemp"] = degrees_celsius!
         self.tempOutput.text = degrees_celsius.stringValue
     }
     
     
     func bean(_ bean: PTDBean!, didUpdateAccelerationAxes acceleration: PTDAcceleration) {
-        someData.append("'X': '\(acceleration.x)', 'Y': '\(acceleration.y)', 'Z': '\(acceleration.z)'"as NSString)
+        someData["X"] = acceleration.x
+        someData["Y"] = acceleration.y
+        someData["Z"] = acceleration.z
+        
         // Show acceleration
 //        print( "********************************")
 //        print( "X: \(acceleration.x); Y: \(acceleration.y); Z: \(acceleration.z)" )
@@ -172,48 +177,54 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
 //        //postRequest(temp: temp)
 //    }
     
-    func postRequest(data: [NSString]) {
+    func postRequest( data: Any) {
         print("post request!!!!!!!!!")
         
         print("SOMEDATA")
-        print(data)
+//        [{'bodyTemp': '42.13', 'X': '-0.0703125', 'Y': '0.09375', 'Z': '1.046875', 'beanTemp': '20'}, 'name': 'gaby_bean' , 'timeStamp': '2017-10-18 02:08:16 +0000'}, 'volts':'Optional(())']
         
-//        let data = [
-//            "uuid": "uuid",
-//            "timeStamp": "currentDate",
-//            "temp": temp,
+//        let obj = [
+//            "bodyTemp": data.bodyTemp,
+//            "X": data.X,
+//            "Y": data.Y,
+//            "Z": data.Z,
+//            "beanTemp": data.beanTemp,
+//            "timeStamp": data.timeStamp,
+//            "name": data.name
 //            ] as [String: Any]
         // "https://oddworld.herokuapp.com/collect_data"
-        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/collect_data")!)
-        request.httpMethod = "POST"
-        request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
-
-
-        print("begin urlsession")
-
-        URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
-            print(response)
-            print("*************")
-            if error != nil {
-                print(error)
-            } else {
-                do {
-                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-
-                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
-                    if errors.count > 0 {
-                        // show error
-                        return
-                    } else {
-                        // show confirmation
-                    }
-                }
-            }
-            print("******************************")
-        }).resume()
+        
+//        print(obj)
+//        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/collect_data")!)
+//        request.httpMethod = "POST"
+//        request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+//        request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
+//
+//
+//        print("begin urlsession")
+//
+//        URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
+//            print(response)
+//            print("*************")
+//            if error != nil {
+//                print(error)
+//            } else {
+//                do {
+//                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+//
+//                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
+//                    if errors.count > 0 {
+//                        // show error
+//                        return
+//                    } else {
+//                        // show confirmation
+//                    }
+//                }
+//            }
+//            print("******************************")
+//        }).resume()
     }
     
     
