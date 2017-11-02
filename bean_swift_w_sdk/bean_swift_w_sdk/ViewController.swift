@@ -145,10 +145,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         self.connectedBean?.readTemperature()
         
         print(someData);
-        if(someData.count>1){
-            postRequest(data: someData)
-            someData = [:]
-        }
+//        if(someData.count>1){
+//            postRequest(data: someData)
+//            someData = [:]
+//        }
         //self.connectedBean?.readBatteryVoltage()
     }
     
@@ -176,17 +176,23 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         //let bytes = data
         //let string = String(bytes: data, encoding: .utf8)
         //var dataString = String(data: bytes!, encoding: .utf16)
+        let first4: String
+        let float4: Float
         let dataString: String = String(data: data, encoding: .utf8)! //?? ""
 //        print("raw: '\(dataString)'")
         if dataString.characters.count > 2 {
-            let first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 4))
+             first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
 //            someData.append("'bodyTemp': '\(first4)' " as NSString)
-              someData["bodyTemp"] = first4
         } else {
-            let first4 = "0"
-            someData["bodyTemp"] = first4
+             first4 = "0"
 //            someData.append("'bodyTemp': '\(first4)' " as NSString)
         }
+        
+        //convert to float
+        float4 = Float(first4)!
+        someData["bodyTemp"] = float4
+        
+        print(float4/100)
         //print(first4)
         //let dataString2: Float = dataString
         //let dataString: String = String(describing: data) //?? ""
