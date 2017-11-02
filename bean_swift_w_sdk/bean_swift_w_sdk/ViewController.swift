@@ -11,6 +11,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     var beanManager: PTDBeanManager?
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
+    var name: String!
 //    var someData = [NSString]()
     var someData: [String: Any] = [:]
     var memory = [NSString]()
@@ -31,11 +32,13 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         } else {
             startScanning()
             print("SCANNING!!!!!")
+            promptText.text = "Searching..."
         }
     }
     
     @IBAction func disconnect(_ sender: Any) {
         beanManager?.disconnectBean(connectedBean, error: nil)
+        print("disconnect");
     }
     
     @IBOutlet weak var nameText: UILabel!
@@ -90,10 +93,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         
         if bean.name == beanName.text! { //TODO: change this to dynamically update based on available beans
             connectedBean = bean
+            name = beanName.text
             print("Discovered your Bean: \(bean.name)")
             connectToBean(bean: connectedBean!)
         }
-        promptText.text = "Searching..."
     }
     
     // Connects to Bean
@@ -110,9 +113,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         //for i in buffer size
         //bufferRepeat = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runUnloadCode), userInfo: nil, repeats: true)
         
-        tempRepeat = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
+        tempRepeat = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         
         print("bean manager called")
+        tempOutput.text = "Loading..."
     }
     
     // func runUnloadCode() {
@@ -126,7 +130,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     func runTimedCode() {
         //self.connectedBean = bean
         self.connectedBean?.delegate = self
-        someData["name"] = beanName.text!
+        someData["name"] = name
 //        someData["timeStamp"] = Date()
 //        postRequest(data: someData)
 //        print(someData)
@@ -153,7 +157,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         print("Disconnected")
         promptText.text = "Enter your device name:"
         beanName.text = ""
-        tempOutput.text = "Loading..."
+        tempOutput.text = "Disconnected"
     }
     
     
