@@ -129,9 +129,13 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     
     func runTimedCode() {
         //self.connectedBean = bean
+//        let timeZone: timeZone?
+//        let date: Date?
+//        date = Date()
         self.connectedBean?.delegate = self
         someData["name"] = name
-//        someData["timeStamp"] = Date()
+//        someData["timeStamp"] = date
+//        print(date)
 //        postRequest(data: someData)
 //        print(someData)
 //        someData = []
@@ -145,11 +149,11 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         self.connectedBean?.readTemperature()
         
         print(someData);
-//        if(someData.count>1){
-//            postRequest(data: someData)
-//            someData = [:]
-//        }
-        //self.connectedBean?.readBatteryVoltage()
+        if(someData.count>2){
+            postRequest(data: someData)
+            someData = [:]
+        }
+        self.connectedBean?.readBatteryVoltage()
     }
     
     func beanManager(_ beanManager: PTDBeanManager!, didDisconnectBean bean: PTDBean!, error: Error!) {
@@ -179,8 +183,9 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         let first4: String
         let float4: Float
         let dataString: String = String(data: data, encoding: .utf8)! //?? ""
-//        print("raw: '\(dataString)'")
-        if dataString.characters.count > 2 {
+        let dataCount = dataString.characters.count
+
+        if dataCount > 2 {
              first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
 //            someData.append("'bodyTemp': '\(first4)' " as NSString)
         } else {
@@ -189,10 +194,13 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         }
         
         //convert to float
-        float4 = Float(first4)!
-        someData["bodyTemp"] = float4
+        if(first4 != nil){
+            float4 = Float(first4)!
+            someData["bodyTemp"] = float4/1000
+        } else {
+            someData["bodyTemp"] = 0.00
+        }
         
-        print(float4/100)
         //print(first4)
         //let dataString2: Float = dataString
         //let dataString: String = String(describing: data) //?? ""
@@ -241,21 +249,21 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
             print("*************")
-            //            if error != nil {
-            //                print(error)
-            //            } else {
-            //                do {
-            //                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-            //
-            //                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
-            //                    if errors.count > 0 {
-            //                        // show error
-            //                        return
-            //                    } else {
-            //                        // show confirmation
-            //                    }
-            //                }
-            //            }
+                        if error != nil {
+                            print(error)
+                        } else {
+                            do {
+                                guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+            
+                                guard let errors = json?["errors"] as? [[String: Any]] else { return }
+                                if errors.count > 0 {
+                                    // show error
+                                    return
+                                } else {
+                                    // show confirmation
+                                }
+                            }
+                        }
             print("******************************")
         }).resume()
     }
