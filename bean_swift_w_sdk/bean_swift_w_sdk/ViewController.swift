@@ -181,22 +181,25 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         //let string = String(bytes: data, encoding: .utf8)
         //var dataString = String(data: bytes!, encoding: .utf16)
         let first4: String
-        let float4: Float
+        let first1: String
+        let float4: Float?
         let dataString: String = String(data: data, encoding: .utf8)! //?? ""
         let dataCount = dataString.characters.count
 
         if dataCount > 2 {
              first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
+             first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
 //            someData.append("'bodyTemp': '\(first4)' " as NSString)
         } else {
              first4 = "0"
+             first1 = "-"
 //            someData.append("'bodyTemp': '\(first4)' " as NSString)
         }
         
         //convert to float
-        if(first4 != nil){
-            float4 = Float(first4)!
-            someData["bodyTemp"] = float4/1000
+        if(first1 != "-"){
+            float4 = Float(first4)
+            someData["bodyTemp"] = float4!/1000
         } else {
             someData["bodyTemp"] = 0.00
         }
