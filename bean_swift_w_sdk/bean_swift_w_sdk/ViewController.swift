@@ -197,9 +197,11 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         }
         
         //convert to float
-        if(first1 != "-"){
+        if(first1 == "9"){
             float4 = Float(first4)
             someData["bodyTemp"] = float4!/1000
+        } else if(first1 == "-"){
+            someData["bodyTemp"] = 0.00
         } else {
             someData["bodyTemp"] = 0.00
         }
