@@ -2,6 +2,11 @@
 //  ViewController.swift
 //  bean_swift_w_sdk
 //
+
+//
+//  ViewController.swift
+//  bean_swift_w_sdk
+//
 import UIKit
 import Bean_iOS_OSX_SDK
 
@@ -12,13 +17,11 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     var connectedBean: PTDBean?
     var tempRepeat: Timer!
     var name: String!
-//    var someData = [NSString]()
     var someData: [String: Any] = [:]
     var memory = [NSString]()
     var batteryLevel: Int = 0
     
     // Create UI variables
-    
     @IBOutlet weak var promptText: UILabel!
     
     //store bean name using core data
@@ -58,17 +61,6 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         self.view.endEditing(true)
         return true
     }
-    
-    
-    
-    // Bean SDK: We check to see if Bluetooth is on.
-    //    func beanManagerDidUpdateState(_ beanManager: PTDBeanManager!) {
-    //        if beanManager!.state == BeanManagerState.poweredOn {
-    //            startScanning()
-    //        } else if beanManager!.state == BeanManagerState.poweredOff {
-    //            print("Please turn on your bluetooth")
-    //        }
-    //    }
     
     // Scan for Peripherals
     func startScanning() {
@@ -110,39 +102,16 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     func beanManager(_ beanManager: PTDBeanManager!, didConnect bean: PTDBean!, error: Error!) {
         self.promptText.text = "Smarty Pants Connected to:"
         
-        //for i in buffer size
-        //bufferRepeat = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(runUnloadCode), userInfo: nil, repeats: true)
-        
         tempRepeat = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(runTimedCode), userInfo: nil, repeats: true)
         
         print("bean manager called")
         tempOutput.text = "Loading..."
     }
     
-    // func runUnloadCode() {
-    //self.connectedBean = bean
-    //    self.connectedBean?.delegate = self
-    //    memory = []
-    //    self.connectedBean?.
-    //    memory.
-    // }
-    
+    // Call data functions
     func runTimedCode() {
-        //self.connectedBean = bean
-//        let timeZone: timeZone?
-//        let date: Date?
-//        date = Date()
         self.connectedBean?.delegate = self
         someData["name"] = name
-//        someData["timeStamp"] = date
-//        print(date)
-//        postRequest(data: someData)
-//        print(someData)
-//        someData = []
-        
-//        someData.append("{'name': '\(beanName.text!)' " as NSString)
-//        someData.append("'timeStamp': '\(Date())' " as NSString)
-//        someData.append("'battery': '\(BATTERY_0_PCNT_VOLTAGE)' " as NSString)
         
         self.connectedBean?.readAccelerationAxes()
         self.connectedBean?.readScratchBank(2)
@@ -165,35 +134,19 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     }
     
     
-    
-    //func bean(_ bean: PTDBean!, serialDataReceived serial:NSData!) {
-    //    print(serial)
-    //    let strReceived = NSString(data: serial as Data, encoding: String.Encoding.utf8.rawValue)
-    //    someData.append("'Temp': '\(strReceived)'}" as NSString)
-    //}
-    
-    
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data!) {
-        //       print("********************************")
-        //        print("found scratch!")
-        //print(data)
-        //let bytes = data
-        //let string = String(bytes: data, encoding: .utf8)
-        //var dataString = String(data: bytes!, encoding: .utf16)
         let first4: String
         let first1: String
         let float4: Float?
         let dataString: String = String(data: data, encoding: .utf8)! //?? ""
         let dataCount = dataString.characters.count
-
+        
         if dataCount > 2 {
-             first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
-             first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
-//            someData.append("'bodyTemp': '\(first4)' " as NSString)
+            first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
+            first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
         } else {
-             first4 = "0"
-             first1 = "-"
-//            someData.append("'bodyTemp': '\(first4)' " as NSString)
+            first4 = "0"
+            first1 = "-"
         }
         
         //convert to float
@@ -205,27 +158,18 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         } else {
             someData["bodyTemp"] = 0.00
         }
-        
-        //print(first4)
-        //let dataString2: Float = dataString
-        //let dataString: String = String(describing: data) //?? ""
-        //someData.append("'bodyTemp': '\(first4)' " as NSString)
-        //        print("********************************")
     }
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
-
-//        someData.append("'beanTemp': '\(degrees_celsius!)' }" as NSString)
         someData["beanTemp"] = degrees_celsius!
         self.tempOutput.text = degrees_celsius.stringValue
     }
     
     
     func bean(_ bean: PTDBean!, didUpdateAccelerationAxes acceleration: PTDAcceleration) {
-//        someData.append("'X': '\(acceleration.x)', 'Y': '\(acceleration.y)', 'Z': '\(acceleration.z)' "as NSString)
-        someData["X"] = acceleration.x
-        someData["Y"] = acceleration.y
-        someData["Z"] = acceleration.z
+        someData["x"] = acceleration.x
+        someData["y"] = acceleration.y
+        someData["z"] = acceleration.z
     }
     
     
@@ -235,51 +179,44 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         print("SOMEDATA")
         print(data)
         
-        //        let data = [
-        //            "uuid": "uuid",
-        //            "timeStamp": "currentDate",
-        //            "temp": temp,
-        //            ] as [String: Any]
-        // "https://oddworld.herokuapp.com/collect_data"
         var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/ios_data")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/vnd.marketplace.v1", forHTTPHeaderField: "Accept")
-
-
+        
+        
         print("begin urlsession")
-
+        
         URLSession.shared.dataTask(with:request, completionHandler: {data, response, error in
             print(response)
-            print("*************")
-                        if error != nil {
-                            print(error)
-                        } else {
-                            do {
-                                guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
             
-                                guard let errors = json?["errors"] as? [[String: Any]] else { return }
-                                if errors.count > 0 {
-                                    // show error
-                                    return
-                                } else {
-                                    // show confirmation
-                                }
-                            }
-                        }
+            print("*************")
+            self.tempOutput.text = "Data Logged!"
+            if error != nil {
+                print(error)
+            } else {
+                do {
+                    guard let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+                    
+                    guard let errors = json?["errors"] as? [[String: Any]] else { return }
+                    if errors.count > 0 {
+                        // show error
+                        return
+                    } else {
+                        // show confirmation
+                    }
+                }
+            }
             print("******************************")
         }).resume()
     }
     
     
     
-    
     //create service function that gets user data to define object we're posting to
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
-
