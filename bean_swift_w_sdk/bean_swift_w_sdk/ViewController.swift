@@ -135,32 +135,40 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         bodyTempOutput.text = "Disconnected"
         accelOutput.text = "Disconnected"
     }
-    
-    
+// extension for converting from bytes to float...
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data!) {
-        let first4: String
-        let first1: String
-        let float4: Float?
-        let dataString: String = String(data: data, encoding: .utf8)! //?? ""
-        let dataCount = dataString.characters.count
+        let array : [Float64] = [0, 0, 0, 0x0E]
+        var value = array.withUnsafeBufferPointer({
+            UnsafePointer<Float64>($0.baseAddress!).pointee
+        })
+        //value = Float64(data: value)
         
-        if dataCount > 2 {
-            first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
-            first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
-        } else {
-            first4 = "0"
-            first1 = "-"
-        }
+        print(value)
+        let dataString: String = String(data: data, encoding: .utf8)!
+        self.bodyTempOutput.text = dataString
+        //let first4: String
+        //let first1: String
+        //let float4: Float?
+        //let dataString: String = String(data: data, encoding: .utf8)! //?? ""
+        //let dataCount = dataString.characters.count
+        
+        //if dataCount > 2 {
+            //first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
+            //first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
+        //} else {
+          //  first4 = "0"
+           // first1 = "-"
+        //}
         
         //convert to float
-        if(first1 == "9"){
-            float4 = Float(first4)
-            someData["bodyTemp"] = float4!/1000
-        } else if(first1 == "-"){
-            someData["bodyTemp"] = 0.00
-        } else {
-            someData["bodyTemp"] = 0.00
-        }
+       // if(first1 == "9"){
+       //     float4 = Float(first4)
+       //     someData["bodyTemp"] = float4!/1000
+       // } else if(first1 == "-"){
+       //     someData["bodyTemp"] = 0.00
+       // } else {
+       //     someData["bodyTemp"] = 0.00
+       // }
     }
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
@@ -173,6 +181,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         someData["x"] = acceleration.x
         someData["y"] = acceleration.y
         someData["z"] = acceleration.z
+        let xString: String = String(acceleration.x)
+        let yString: String = String(acceleration.y)
+        let zString: String = String(acceleration.z)
+        self.accelOutput.text = xString+" "+yString+" "+zString
     }
     
     
