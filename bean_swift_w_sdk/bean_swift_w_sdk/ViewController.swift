@@ -40,7 +40,11 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     
     @IBAction func disconnect(_ sender: Any) {
         beanManager?.disconnectBean(connectedBean, error: nil)
-        print("disconnect");
+        print("disconnect")
+        tempOutput.text = "Disconnected"
+        bodyTempOutput.text = "Disconnected"
+        accelOutput.text = "Disconnected"
+        promptText.text = "Disconnected..."
     }
     
     @IBOutlet weak var nameText: UILabel!
@@ -137,43 +141,30 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     }
 // extension for converting from bytes to float...
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data!) {
-        let array : [Float64] = [0, 0, 0, 0x0E]
-        var value = array.withUnsafeBufferPointer({
-            UnsafePointer<Float64>($0.baseAddress!).pointee
-        })
-        //value = Float64(data: value)
-        
-        print(value)
-        let dataString: String = String(data: data, encoding: .utf8)!
-        self.bodyTempOutput.text = dataString
-        //let first4: String
-        //let first1: String
-        //let float4: Float?
-        //let dataString: String = String(data: data, encoding: .utf8)! //?? ""
-        //let dataCount = dataString.characters.count
-        
-        //if dataCount > 2 {
-            //first4 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 5))
-            //first1 = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy:1))
-        //} else {
-          //  first4 = "0"
-           // first1 = "-"
-        //}
-        
-        //convert to float
-       // if(first1 == "9"){
-       //     float4 = Float(first4)
-       //     someData["bodyTemp"] = float4!/1000
-       // } else if(first1 == "-"){
-       //     someData["bodyTemp"] = 0.00
-       // } else {
-       //     someData["bodyTemp"] = 0.00
-       // }
+        var dataStart: String
+        var dataEnd: String
+        let decimal:String = "."
+        var dataString: String = (String(data: data, encoding: .utf8))!
+        dataString = dataString.substring(to:dataString.index(dataString.startIndex, offsetBy: 4))
+        if dataString != nil {
+            dataStart = String(dataString.prefix(2))
+            dataEnd = String(dataString.suffix(2))
+            dataString = dataStart+decimal+dataEnd
+            
+            self.bodyTempOutput.text = dataString
+            someData["bodyTemp"] = dataString
+        } else {
+            self.bodyTempOutput.text = "0.00"
+            someData["bodyTemp"] = "0.00"
+        }
     }
     
     func bean(_ bean: PTDBean!, didUpdateTemperature degrees_celsius: NSNumber!) {
-        someData["beanTemp"] = degrees_celsius!
-        self.tempOutput.text = degrees_celsius.stringValue
+        var tempC:Int8 = Int8(degrees_celsius!)
+        var tempF:Int8 = ((9/5)*tempC)+32
+        someData["beanTemp"] = tempF
+        var stringF:String = String(tempF)
+        self.tempOutput.text = stringF
     }
     
     
@@ -209,6 +200,8 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
             
             print("*************")
             self.tempOutput.text = "Data Logged!"
+            self.bodyTempOutput.text = "Data Logged!"
+            self.accelOutput.text = "Data Logged!"
                         if error != nil {
                             print(error)
                         } else {
