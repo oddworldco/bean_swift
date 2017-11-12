@@ -127,7 +127,7 @@
 				TargetAttributes = {
 					5A5B39551F670EEE003B2A4C = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9M63446EUT;
+						DevelopmentTeam = VZ8YDEK6H4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -349,7 +349,7 @@
 			baseConfigurationReference = 5109BF166C480935B18C821A /* Pods-bean_swift_w_sdk.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9M63446EUT;
+				DEVELOPMENT_TEAM = VZ8YDEK6H4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Bean-iOS-OSX-SDK",
 					"$(inherited)",
@@ -357,7 +357,7 @@
 				);
 				INFOPLIST_FILE = bean_swift_w_sdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.slater.bean-swift-w-sdk";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vrabec.bean-swift-w-sdk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -368,7 +368,7 @@
 			baseConfigurationReference = 8C09696C2768AE55F39F2C27 /* Pods-bean_swift_w_sdk.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9M63446EUT;
+				DEVELOPMENT_TEAM = VZ8YDEK6H4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Bean-iOS-OSX-SDK",
 					"$(inherited)",
@@ -376,7 +376,7 @@
 				);
 				INFOPLIST_FILE = bean_swift_w_sdk/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.slater.bean-swift-w-sdk";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vrabec.bean-swift-w-sdk";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

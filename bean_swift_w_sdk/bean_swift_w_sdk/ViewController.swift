@@ -24,6 +24,10 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     
     @IBOutlet weak var tempOutput: UILabel!
     
+    @IBOutlet weak var bodyTempOutput: UILabel!
+    
+    @IBOutlet weak var accelOutput: UILabel!
+    
     @IBAction func connect(_ sender: Any) {
         if beanName.text == ""  {
             promptText.text = "Please enter name to connect"
@@ -101,6 +105,8 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         
         print("bean manager called")
         tempOutput.text = "Loading..."
+        bodyTempOutput.text = "Loading..."
+        accelOutput.text = "Loading..."
     }
     
     // Call data functions
@@ -126,6 +132,8 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         promptText.text = "Enter your device name:"
         beanName.text = ""
         tempOutput.text = "Disconnected"
+        bodyTempOutput.text = "Disconnected"
+        accelOutput.text = "Disconnected"
     }
     
     

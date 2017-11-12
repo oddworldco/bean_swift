@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  bean_swift_w_sdk
 //
-//  Created by joseph slater on 9/11/17.
-//  Copyright © 2017 joseph slater. All rights reserved.
+//  Created by rachel vrabecon 11/11/17.
+//  Copyright © 2017 rachel vrabec. All rights reserved.
 //
 
 import UIKit
