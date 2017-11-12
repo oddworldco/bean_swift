@@ -23,19 +23,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tap the button to input your test data:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lg4-62-0s0">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to input your test data:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lg4-62-0s0">
                                 <rect key="frame" x="43" y="218" width="289" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://script.google.com/macros/s/AKfycbwSzke_p-K1XTZeBcJLi9Z_7jHMTyoGCinbLdIjy6irXE9SlQ/exec " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zEf-cn-hza">
-                                <rect key="frame" x="31" y="392.5" width="319" height="101.5"/>
+                                <rect key="frame" x="31" y="393" width="319" height="101"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="If button doesn't work, use this link:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHU-FK-qeC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If button doesn't work, use this link:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHU-FK-qeC">
                                 <rect key="frame" x="52" y="341" width="271" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -44,11 +44,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zEf-cn-hza" firstAttribute="top" secondItem="XHU-FK-qeC" secondAttribute="bottom" constant="31" id="9e1-H1-6hK"/>
                             <constraint firstItem="lg4-62-0s0" firstAttribute="centerX" secondItem="pCV-jC-ygZ" secondAttribute="centerX" id="B8A-z7-LbX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zEf-cn-hza" secondAttribute="trailing" constant="9" id="DMb-Og-ifS"/>
-                            <constraint firstItem="f5l-YH-hRC" firstAttribute="top" secondItem="XHU-FK-qeC" secondAttribute="bottom" constant="256" id="JCC-xv-Jld"/>
-                            <constraint firstItem="f5l-YH-hRC" firstAttribute="top" secondItem="zEf-cn-hza" secondAttribute="bottom" constant="124" id="MQV-RO-BK2"/>
-                            <constraint firstItem="zEf-cn-hza" firstAttribute="leading" secondItem="pCV-jC-ygZ" secondAttribute="leadingMargin" constant="15" id="Rsd-YZ-5PG"/>
+                            <constraint firstItem="lg4-62-0s0" firstAttribute="top" secondItem="5pe-I4-4aD" secondAttribute="bottom" constant="198" id="H8s-6I-mpq"/>
+                            <constraint firstAttribute="bottom" secondItem="XHU-FK-qeC" secondAttribute="bottom" constant="305" id="JqV-EO-uiu"/>
+                            <constraint firstItem="f5l-YH-hRC" firstAttribute="top" secondItem="zEf-cn-hza" secondAttribute="bottom" constant="124" id="Nz8-Ng-Fib"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zEf-cn-hza" secondAttribute="trailing" constant="9" id="cY6-Ms-ZNb"/>
+                            <constraint firstItem="XHU-FK-qeC" firstAttribute="centerX" secondItem="lg4-62-0s0" secondAttribute="centerX" id="hui-Ri-z0I"/>
+                            <constraint firstItem="zEf-cn-hza" firstAttribute="leading" secondItem="pCV-jC-ygZ" secondAttribute="leadingMargin" constant="15" id="twM-TY-LL8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Input Test Data" id="Nzl-0G-Kzu"/>
