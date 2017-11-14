@@ -88,9 +88,12 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         
         if bean.name == beanName.text! { //TODO: change this to dynamically update based on available beans
             connectedBean = bean
-            name = beanName.text
+            name = beanName.text as! String
             print("Discovered your Bean: \(bean.name)")
             connectToBean(bean: connectedBean!)
+            let nameData = ["name": name]
+            
+            NotificationCenter.default.post(name: BEAN_NAME_NOTIFICATION, object: nil, userInfo: nameData)
         }
     }
     
