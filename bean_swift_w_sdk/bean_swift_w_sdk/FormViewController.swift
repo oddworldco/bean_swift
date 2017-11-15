@@ -1,27 +1,31 @@
 //
-//  FormController.swift
+//  FormViewController.swift
 //  bean_swift_w_sdk
 //
-//  Created by Gaby Ruiz-Funes on 11/13/17.
+//  Created by Gaby Ruiz-Funes on 11/15/17.
 //  Copyright © 2017 joseph slater. All rights reserved.
 //
 
 import UIKit
 
-class FormController: UIViewController,  UITextFieldDelegate {
+class FormViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+    }
     
     var formData: [String: Any] = [:]
-
+    
     // Initialize input fields
     @IBOutlet weak var inputName: UITextField!
     @IBOutlet weak var inputBBT: UITextField!
     
-    func textFieldShouldReturn(_ inputName: UITextField, inputBBT: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
+    // Initialize labels
+    @IBOutlet weak var mensesLabel: UILabel!
     
-    // Initialize submit Button
+    
+    // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
         
         formData["name"] = inputName.text
@@ -32,9 +36,20 @@ class FormController: UIViewController,  UITextFieldDelegate {
     }
     
     
+    // Menstruation switch
     
+    @IBAction func mensesSwitch(_ sender: UISwitch) {
+        if(sender.isOn == true){
+            print("on")
+            mensesLabel.text = "Menstruating"
+        } else {
+            print("off")
+            mensesLabel.text = "Not menstruating"
+        }
+    }
+
     
-    
+    // Post data
     func postRequest(data: Any) {
         print("post request!!!!!!!!!")
         
@@ -74,31 +89,21 @@ class FormController: UIViewController,  UITextFieldDelegate {
         }).resume()
     }
     
-    
-    
-    //create service function that gets user data to define object we're posting to
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-
-//        NotificationCenter.default.addObserver(self,
-//           selector: #selector(self.getBeanName(_:)),
-//           name: BEAN_NAME_NOTIFICATION,
-//           object: nil)
+        // Dispose of any resources that can be recreated.
     }
     
-    
-//    func getBeanName(_ notification: NSNotification) -> Void {
-//        // use guard to display conditional data
-//        guard let userInfor = notification.userInfo,
-//              let name = userInfo["name"] as? String else {
-//                print("Error! No name found!")
-//                return
-//        }
-//
-//        DispatchQueue.main.async {
-//            print("name!!!")
-//            print(name)
-//        }
-//    }
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

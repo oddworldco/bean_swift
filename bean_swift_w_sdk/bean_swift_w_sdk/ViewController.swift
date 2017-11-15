@@ -93,7 +93,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
             connectToBean(bean: connectedBean!)
             let nameData = ["name": name]
             
-            NotificationCenter.default.post(name: BEAN_NAME_NOTIFICATION, object: nil, userInfo: nameData)
+//            NotificationCenter.default.post(name: BEAN_NAME_NOTIFICATION, object: nil, userInfo: nameData)
         }
     }
     
@@ -188,7 +188,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         print("SOMEDATA")
         print(data)
         
-        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/ios_data")!)
+        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/ios_test")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -224,11 +224,21 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         }).resume()
     }
     
-    
-    
     //create service function that gets user data to define object we're posting to
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

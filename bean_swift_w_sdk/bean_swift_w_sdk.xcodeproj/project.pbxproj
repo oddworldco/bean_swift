@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EFBDCD31FB90CE300674BBB /* icon20x20.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EFBDCD21FB90CE300674BBB /* icon20x20.storyboard */; };
 		5A5B395A1F670EEE003B2A4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B39591F670EEE003B2A4C /* AppDelegate.swift */; };
 		5A5B395C1F670EEE003B2A4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5B395B1F670EEE003B2A4C /* ViewController.swift */; };
 		5A5B395F1F670EEF003B2A4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5B395D1F670EEF003B2A4C /* Main.storyboard */; };
@@ -16,12 +15,11 @@
 		800327651F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800327641F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework */; };
 		8013A63A1FBA245900B073B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013A6391FBA245900B073B6 /* Constants.swift */; };
 		8013A63C1FBA271B00B073B6 /* FormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013A63B1FBA271B00B073B6 /* FormController.swift */; };
-		8013A63F1FBA7E7200B073B6 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013A63E1FBA7E7200B073B6 /* RadioButton.swift */; };
 		802E427C1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802E427B1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework */; };
+		808100BD1FBCC68B0005C372 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808100BC1FBCC68B0005C372 /* FormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3EFBDCD21FB90CE300674BBB /* icon20x20.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = icon20x20.storyboard; path = ../../../Desktop/icons/icon20x20.storyboard; sourceTree = "<group>"; };
 		5109BF166C480935B18C821A /* Pods-bean_swift_w_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bean_swift_w_sdk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bean_swift_w_sdk/Pods-bean_swift_w_sdk.debug.xcconfig"; sourceTree = "<group>"; };
 		5A5B39561F670EEE003B2A4C /* bean_swift_w_sdk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bean_swift_w_sdk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5B39591F670EEE003B2A4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,8 +31,8 @@
 		800327641F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_bean_swift_w_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8013A6391FBA245900B073B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8013A63B1FBA271B00B073B6 /* FormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormController.swift; sourceTree = "<group>"; };
-		8013A63E1FBA7E7200B073B6 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		802E427B1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bean_iOS_OSX_SDK.framework; path = "Bean-iOS-OSX-SDK/Bean_iOS_OSX_SDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		808100BC1FBCC68B0005C372 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		8C09696C2768AE55F39F2C27 /* Pods-bean_swift_w_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bean_swift_w_sdk.release.xcconfig"; path = "Pods/Target Support Files/Pods-bean_swift_w_sdk/Pods-bean_swift_w_sdk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,9 +52,7 @@
 		5A5B394D1F670EEE003B2A4C = {
 			isa = PBXGroup;
 			children = (
-				8013A63D1FBA7E5600B073B6 /* models */,
 				8013A6381FBA242E00B073B6 /* constants */,
-				3EFBDCD21FB90CE300674BBB /* icon20x20.storyboard */,
 				5A5B39581F670EEE003B2A4C /* bean_swift_w_sdk */,
 				5A5B39571F670EEE003B2A4C /* Products */,
 				F0A0EB5C2E01F2B1C355B4CE /* Pods */,
@@ -79,6 +75,7 @@
 				5A5B395B1F670EEE003B2A4C /* ViewController.swift */,
 				8013A63B1FBA271B00B073B6 /* FormController.swift */,
 				5A5B395D1F670EEF003B2A4C /* Main.storyboard */,
+				808100BC1FBCC68B0005C372 /* FormViewController.swift */,
 				5A5B39601F670EEF003B2A4C /* Assets.xcassets */,
 				5A5B39621F670EEF003B2A4C /* LaunchScreen.storyboard */,
 				5A5B39651F670EEF003B2A4C /* Info.plist */,
@@ -92,14 +89,6 @@
 				8013A6391FBA245900B073B6 /* Constants.swift */,
 			);
 			path = constants;
-			sourceTree = "<group>";
-		};
-		8013A63D1FBA7E5600B073B6 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				8013A63E1FBA7E7200B073B6 /* RadioButton.swift */,
-			);
-			path = models;
 			sourceTree = "<group>";
 		};
 		8B66F9E7B7C4D4CDD7F33A20 /* Frameworks */ = {
@@ -183,7 +172,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFBDCD31FB90CE300674BBB /* icon20x20.storyboard in Resources */,
 				5A5B39641F670EEF003B2A4C /* LaunchScreen.storyboard in Resources */,
 				5A5B39611F670EEF003B2A4C /* Assets.xcassets in Resources */,
 				5A5B395F1F670EEF003B2A4C /* Main.storyboard in Resources */,
@@ -253,8 +241,8 @@
 			files = (
 				5A5B395C1F670EEE003B2A4C /* ViewController.swift in Sources */,
 				5A5B395A1F670EEE003B2A4C /* AppDelegate.swift in Sources */,
-				8013A63F1FBA7E7200B073B6 /* RadioButton.swift in Sources */,
 				8013A63A1FBA245900B073B6 /* Constants.swift in Sources */,
+				808100BD1FBCC68B0005C372 /* FormViewController.swift in Sources */,
 				8013A63C1FBA271B00B073B6 /* FormController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
