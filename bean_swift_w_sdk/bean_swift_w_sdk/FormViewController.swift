@@ -9,12 +9,6 @@
 import UIKit
 
 class FormViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround()
-    }
-    
     var formData: [String: Any] = [:]
     
     // Initialize input fields
@@ -24,6 +18,80 @@ class FormViewController: UIViewController {
     // Initialize labels
     @IBOutlet weak var mensesLabel: UILabel!
     
+    // Menstruation switch
+    @IBOutlet weak var mensesSwitch: UISwitch!
+
+    @IBAction func mensesSwitch(_ sender: UISwitch) {
+        if(sender.isOn == true){
+            print("on")
+            mensesLabel.text = "Yes"
+            formData["menses"] = true
+            print(formData["menses"])
+
+        } else {
+            print("off")
+            mensesLabel.text = "No"
+            print(formData["menses"])
+        }
+    }
+    
+    
+    // BBT datepicker
+//    @IBOutlet weak var bbtDate: UIDatePicker!
+//    @IBAction func bbtDateChanged(_ sender: UIDatePicker) {
+//        print("print \(sender.date)")
+//
+//        //        let dateFormatter = DateFormatter()
+//        //        dateFormatter.dateFormat = "YYYY-MM-DD HH:MI:SS ZONE"
+//        //        let somedateString = dateFormatter.string(from: sender.date)
+//        //
+//        //        print(somedateString)  // "somedateString" is your string date
+//    }
+//
+//
+    
+    // LH switches
+    @IBOutlet weak var lhSurge: UISwitch!
+    @IBAction func lhSurge(_ sender: UISwitch) {
+        if(sender.isOn == true){
+            print("on")
+            formData["lh_surge"] = true
+            noSurge.setOn(false, animated: false)
+            lhInconclusive.setOn(false, animated: false)
+        }
+    }
+    
+    @IBOutlet weak var noSurge: UISwitch!
+    @IBAction func noSurge(_ sender: UISwitch) {
+        if(sender.isOn == true){
+            print("on")
+            formData["lh_surge"] = false
+            lhSurge.setOn(false, animated: false)
+            lhInconclusive.setOn(false, animated: false)
+        }
+    }
+    
+    @IBOutlet weak var lhInconclusive: UISwitch!
+    @IBAction func lhInconclusive(_ sender: UISwitch) {
+        if(sender.isOn == true){
+            print("on")
+            formData["lh_surge"] = "inconclusive"
+            lhSurge.setOn(false, animated: false)
+            noSurge.setOn(false, animated: false)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        mensesSwitch.setOn(false, animated: false)
+        lhSurge.setOn(false, animated: false)
+        noSurge.setOn(false, animated: false)
+        lhInconclusive.setOn(false, animated: false)
+        //defaultValues
+        formData["menses"] = false
+        formData["lh_surge"] = "no test"
+    }
     
     // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
@@ -33,19 +101,6 @@ class FormViewController: UIViewController {
         
         postRequest(data: formData)
         formData = [:]
-    }
-    
-    
-    // Menstruation switch
-    
-    @IBAction func mensesSwitch(_ sender: UISwitch) {
-        if(sender.isOn == true){
-            print("on")
-            mensesLabel.text = "Menstruating"
-        } else {
-            print("off")
-            mensesLabel.text = "Not menstruating"
-        }
     }
 
     
