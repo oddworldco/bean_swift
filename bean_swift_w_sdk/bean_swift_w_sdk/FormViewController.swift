@@ -72,7 +72,7 @@ class FormViewController: UIViewController {
         print("SOMEDATA")
         print(data)
         
-        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/ios_test")!)
+        var request = URLRequest(url: URL(string: "https://oddworld.herokuapp.com/bbt_data")!)
         request.httpMethod = "POST"
         request.httpBody = try! JSONSerialization.data(withJSONObject: data, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
