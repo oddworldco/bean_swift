@@ -296,7 +296,7 @@
             </objects>
             <point key="canvasLocation" x="3392.8000000000002" y="484.40779610194909"/>
         </scene>
-        <!--Item-->
+        <!--Stream Data-->
         <scene sceneID="llZ-A8-OEk">
             <objects>
                 <viewController id="VLq-M5-gto" customClass="ViewController" customModule="bean_swift_w_sdk" customModuleProvider="target" sceneMemberID="viewController">
@@ -408,7 +408,7 @@
                             <constraint firstItem="RxC-Fl-x3r" firstAttribute="leading" secondItem="WHH-T0-mEu" secondAttribute="leadingMargin" id="yiP-ip-kkf"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="hHI-bf-gba"/>
+                    <tabBarItem key="tabBarItem" title="Stream Data" id="hHI-bf-gba"/>
                     <navigationItem key="navigationItem" id="Qfu-3a-eqh"/>
                     <connections>
                         <outlet property="accelOutput" destination="GDX-ec-Q5G" id="UqJ-3v-rXk"/>
