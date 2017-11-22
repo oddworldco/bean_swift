@@ -1,91 +1,65 @@
 //
-//  FormViewController.swift
+//  LHViewController.swift
 //  bean_swift_w_sdk
 //
-//  Created by Gaby Ruiz-Funes on 11/15/17.
+//  Created by Gaby Ruiz-Funes on 11/21/17.
 //  Copyright © 2017 joseph slater. All rights reserved.
 //
 
 import UIKit
 
-class FormViewController: UIViewController {
+class LHViewController: UIViewController {
+
     var formData: [String: Any] = [:]
     
     // Initialize input fields
     @IBOutlet weak var inputName: UITextField!
-    @IBOutlet weak var inputBBT: UITextField!
-    
-    // Initialize labels
-    @IBOutlet weak var mensesLabel: UILabel!
-    
-    // Menstruation switch
-    @IBOutlet weak var mensesSwitch: UISwitch!
-    
-    @IBAction func mensesSwitch(_ sender: UISwitch) {
-        if(sender.isOn == true){
-            print("on")
-            mensesLabel.text = "Yes"
-            formData["menses"] = true
-            print(formData["menses"])
-            
-        } else {
-            print("off")
-            mensesLabel.text = "No"
-            print(formData["menses"])
-        }
-    }
-    
-    
-    
     
     // LH switches
-//    @IBOutlet weak var lhSurge: UISwitch!
-//    @IBAction func lhSurge(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = true
-//            noSurge.setOn(false, animated: false)
-//            lhInconclusive.setOn(false, animated: false)
-//        }
-//    }
-//    
-//    @IBOutlet weak var noSurge: UISwitch!
-//    @IBAction func noSurge(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = false
-//            lhSurge.setOn(false, animated: false)
-//            lhInconclusive.setOn(false, animated: false)
-//        }
-//    }
-//    
-//    @IBOutlet weak var lhInconclusive: UISwitch!
-//    @IBAction func lhInconclusive(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = "inconclusive"
-//            lhSurge.setOn(false, animated: false)
-//            noSurge.setOn(false, animated: false)
-//        }
-//    }
+        @IBOutlet weak var lhSurge: UISwitch!
+        @IBAction func lhSurge(_ sender: UISwitch) {
+            if(sender.isOn == true){
+                print("on")
+                formData["lh_surge"] = true
+                noSurge.setOn(false, animated: false)
+                lhInconclusive.setOn(false, animated: false)
+            }
+        }
+    
+        @IBOutlet weak var noSurge: UISwitch!
+        @IBAction func noSurge(_ sender: UISwitch) {
+            if(sender.isOn == true){
+                print("on")
+                formData["lh_surge"] = false
+                lhSurge.setOn(false, animated: false)
+                lhInconclusive.setOn(false, animated: false)
+            }
+        }
+    
+        @IBOutlet weak var lhInconclusive: UISwitch!
+        @IBAction func lhInconclusive(_ sender: UISwitch) {
+            if(sender.isOn == true){
+                print("on")
+                formData["lh_surge"] = "inconclusive"
+                lhSurge.setOn(false, animated: false)
+                noSurge.setOn(false, animated: false)
+            }
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        mensesSwitch.setOn(false, animated: false)
-//        lhSurge.setOn(false, animated: false)
-//        noSurge.setOn(false, animated: false)
-//        lhInconclusive.setOn(false, animated: false)
+                lhSurge.setOn(false, animated: false)
+                noSurge.setOn(false, animated: false)
+                lhInconclusive.setOn(false, animated: false)
         //defaultValues
-        formData["menses"] = false
-//        formData["lh_surge"] = "no test"
+        formData["lh_surge"] = "no test"
     }
     
     // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
         
         formData["name"] = inputName.text
-        formData["oral_temp"] = inputBBT.text
         
         postRequest(data: formData)
         formData = [:]
@@ -148,6 +122,5 @@ class FormViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
-}
 
+}

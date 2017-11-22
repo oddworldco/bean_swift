@@ -13,10 +13,10 @@
 		5A5B39611F670EEF003B2A4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A5B39601F670EEF003B2A4C /* Assets.xcassets */; };
 		5A5B39641F670EEF003B2A4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A5B39621F670EEF003B2A4C /* LaunchScreen.storyboard */; };
 		800327651F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 800327641F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework */; };
+		800BBD331FC520120083E61A /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800BBD321FC520120083E61A /* FormViewController.swift */; };
+		800BBD351FC528870083E61A /* LHViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800BBD341FC528870083E61A /* LHViewController.swift */; };
 		8013A63A1FBA245900B073B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013A6391FBA245900B073B6 /* Constants.swift */; };
-		8013A63C1FBA271B00B073B6 /* FormController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013A63B1FBA271B00B073B6 /* FormController.swift */; };
 		802E427C1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 802E427B1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework */; };
-		808100BD1FBCC68B0005C372 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808100BC1FBCC68B0005C372 /* FormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,10 +29,10 @@
 		5A5B39631F670EEF003B2A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A5B39651F670EEF003B2A4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		800327641F6DCDDD0015D490 /* Pods_bean_swift_w_sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_bean_swift_w_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		800BBD321FC520120083E61A /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		800BBD341FC528870083E61A /* LHViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHViewController.swift; sourceTree = "<group>"; };
 		8013A6391FBA245900B073B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		8013A63B1FBA271B00B073B6 /* FormController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormController.swift; sourceTree = "<group>"; };
 		802E427B1F6DCD7D00531E44 /* Bean_iOS_OSX_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bean_iOS_OSX_SDK.framework; path = "Bean-iOS-OSX-SDK/Bean_iOS_OSX_SDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		808100BC1FBCC68B0005C372 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		8C09696C2768AE55F39F2C27 /* Pods-bean_swift_w_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bean_swift_w_sdk.release.xcconfig"; path = "Pods/Target Support Files/Pods-bean_swift_w_sdk/Pods-bean_swift_w_sdk.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,9 +73,9 @@
 			children = (
 				5A5B39591F670EEE003B2A4C /* AppDelegate.swift */,
 				5A5B395B1F670EEE003B2A4C /* ViewController.swift */,
-				8013A63B1FBA271B00B073B6 /* FormController.swift */,
+				800BBD321FC520120083E61A /* FormViewController.swift */,
+				800BBD341FC528870083E61A /* LHViewController.swift */,
 				5A5B395D1F670EEF003B2A4C /* Main.storyboard */,
-				808100BC1FBCC68B0005C372 /* FormViewController.swift */,
 				5A5B39601F670EEF003B2A4C /* Assets.xcassets */,
 				5A5B39621F670EEF003B2A4C /* LaunchScreen.storyboard */,
 				5A5B39651F670EEF003B2A4C /* Info.plist */,
@@ -241,9 +241,9 @@
 			files = (
 				5A5B395C1F670EEE003B2A4C /* ViewController.swift in Sources */,
 				5A5B395A1F670EEE003B2A4C /* AppDelegate.swift in Sources */,
+				800BBD331FC520120083E61A /* FormViewController.swift in Sources */,
+				800BBD351FC528870083E61A /* LHViewController.swift in Sources */,
 				8013A63A1FBA245900B073B6 /* Constants.swift in Sources */,
-				808100BD1FBCC68B0005C372 /* FormViewController.swift in Sources */,
-				8013A63C1FBA271B00B073B6 /* FormController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
