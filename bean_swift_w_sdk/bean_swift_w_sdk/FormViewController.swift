@@ -37,48 +37,14 @@ class FormViewController: UIViewController {
     
     
     
-    
-    // LH switches
-//    @IBOutlet weak var lhSurge: UISwitch!
-//    @IBAction func lhSurge(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = true
-//            noSurge.setOn(false, animated: false)
-//            lhInconclusive.setOn(false, animated: false)
-//        }
-//    }
-//    
-//    @IBOutlet weak var noSurge: UISwitch!
-//    @IBAction func noSurge(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = false
-//            lhSurge.setOn(false, animated: false)
-//            lhInconclusive.setOn(false, animated: false)
-//        }
-//    }
-//    
-//    @IBOutlet weak var lhInconclusive: UISwitch!
-//    @IBAction func lhInconclusive(_ sender: UISwitch) {
-//        if(sender.isOn == true){
-//            print("on")
-//            formData["lh_surge"] = "inconclusive"
-//            lhSurge.setOn(false, animated: false)
-//            noSurge.setOn(false, animated: false)
-//        }
-//    }
+@IBOutlet weak var bbtDatePicker: UIDatePicker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         mensesSwitch.setOn(false, animated: false)
-//        lhSurge.setOn(false, animated: false)
-//        noSurge.setOn(false, animated: false)
-//        lhInconclusive.setOn(false, animated: false)
         //defaultValues
         formData["menses"] = false
-//        formData["lh_surge"] = "no test"
     }
     
     // Initialize submit button
@@ -86,6 +52,13 @@ class FormViewController: UIViewController {
         
         formData["name"] = inputName.text
         formData["oral_temp"] = inputBBT.text
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let strDate = dateFormatter.string(from: bbtDatePicker.date)
+        formData["lhTime"] = strDate
+        
+        print(strDate);
         
         postRequest(data: formData)
         formData = [:]

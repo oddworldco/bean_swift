@@ -46,6 +46,10 @@ class LHViewController: UIViewController {
             }
         }
     
+    // Date Picker
+    @IBOutlet weak var lhDatePicker: UIDatePicker!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -53,13 +57,19 @@ class LHViewController: UIViewController {
                 noSurge.setOn(false, animated: false)
                 lhInconclusive.setOn(false, animated: false)
         //defaultValues
-        formData["lh_surge"] = "no test"
+        formData["lh_surge"] = "NA"
+
     }
     
     // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
         
         formData["name"] = inputName.text
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let strDate = dateFormatter.string(from: lhDatePicker.date)
+        formData["lhTime"] = strDate
         
         postRequest(data: formData)
         formData = [:]
