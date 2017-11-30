@@ -7,7 +7,11 @@
 		<key>Bean-iOS-OSX-SDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>0</integer>
+=======
+			<integer>1</integer>
+>>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
 		</dict>
 		<key>Pods-bean_swift_w_sdk.xcscheme</key>
 		<dict>

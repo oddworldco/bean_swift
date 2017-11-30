@@ -2,8 +2,13 @@
 //  AppDelegate.swift
 //  bean_swift_w_sdk
 //
+<<<<<<< HEAD
 //  Created by rachel vrabecon 11/11/17.
 //  Copyright © 2017 rachel vrabec. All rights reserved.
+=======
+//  Created by Rachel Vrabec on 9/11/17.
+//  Copyright © 2017 Rachel Vrabec. All rights reserved.
+>>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
 //
 
 import UIKit
