@@ -40,14 +40,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
     
     @IBAction func disconnect(_ sender: Any) {
         beanManager?.disconnectBean(connectedBean, error: nil)
-        print("disconnect")
-        tempOutput.text = "Disconnected"
-        bodyTempOutput.text = "Disconnected"
-        accelOutput.text = "Disconnected"
-        promptText.text = "Disconnected..."
     }
-    
-    @IBOutlet weak var nameText: UILabel!
     
     // After view is loaded into memory, we create an instance of PTDBeanManager
     // and assign ourselves as the delegate
@@ -152,6 +145,7 @@ class ViewController: UIViewController,  UITextFieldDelegate, PTDBeanManagerDele
         bodyTempOutput.text = "Disconnected"
         accelOutput.text = "Disconnected"
     }
+    
     // extension for converting from bytes to float...
     func bean(_ bean: PTDBean!, didUpdateScratchBank bank: Int, data:Data!) {
         var dataStart: String
