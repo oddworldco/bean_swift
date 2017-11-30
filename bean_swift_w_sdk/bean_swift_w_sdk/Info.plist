@@ -19,11 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-<<<<<<< HEAD
-	<string>1</string>
-=======
-	<string>8</string>
->>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
+	<string>9</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -33,19 +29,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-<<<<<<< HEAD
-=======
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Read from peripheral device</string>
+	<string>Peripheral sends device temp sensor to cloud database</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
 	</array>
->>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UILaunchImageFile</key>
-	<string>smartypantslaunch</string>
+	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
