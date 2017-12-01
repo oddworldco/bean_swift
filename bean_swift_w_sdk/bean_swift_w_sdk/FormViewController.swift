@@ -47,9 +47,15 @@ class FormViewController: UIViewController {
         formData["menses"] = false
     }
     
+    @IBOutlet weak var BBTlog: UILabel!
+    
     // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
-        
+        if inputName.text == ""  {
+            BBTlog.text = "Please enter name to connect"
+        } else {
+            BBTlog.text = "Data Logged"
+        }
         formData["name"] = inputName.text
         formData["oral_temp"] = inputBBT.text
         

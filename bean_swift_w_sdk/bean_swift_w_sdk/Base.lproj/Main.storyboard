@@ -95,6 +95,13 @@
                                     <!--2017-11-20 11:00:00 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7J-nd-XyH">
+                                <rect key="frame" x="240" y="529" width="119" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -127,6 +134,7 @@
                     <tabBarItem key="tabBarItem" title="BBT Data" id="d7U-Ni-wkV" userLabel="BBT Data"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="BBTlog" destination="B7J-nd-XyH" id="ao1-Z0-awE"/>
                         <outlet property="bbtDatePicker" destination="khO-th-1IH" id="YKb-t4-p2X"/>
                         <outlet property="inputBBT" destination="Gfq-VC-qw5" id="wpt-qb-wak"/>
                         <outlet property="inputName" destination="Nfo-Pq-JB3" id="aho-0Z-wRq"/>
@@ -249,6 +257,13 @@
                                     <action selector="lhInconclusive:" destination="BXM-S8-0ZH" eventType="valueChanged" id="fWe-x8-Hfo"/>
                                 </connections>
                             </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gj-w0-kd1">
+                                <rect key="frame" x="247" y="564" width="128" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -285,6 +300,7 @@
                     <tabBarItem key="tabBarItem" title="LH Data" id="zHE-o1-ULK" userLabel="LH Data"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="LHlog" destination="4Gj-w0-kd1" id="Enm-64-oqR"/>
                         <outlet property="inputName" destination="ipV-Cg-BiA" id="1D8-JW-WyS"/>
                         <outlet property="lhDatePicker" destination="m4w-cA-cCg" id="g1W-zp-hHV"/>
                         <outlet property="lhInconclusive" destination="tpe-A8-T3h" id="0Vi-Qr-qhD"/>

@@ -3,7 +3,7 @@
 //  bean_swift_w_sdk
 //
 //  Created by Gaby Ruiz-Funes on 11/21/17.
-//  Copyright © 2017 joseph slater. All rights reserved.
+//  Copyright © 2017 rachel vrabec. All rights reserved.
 //
 
 import UIKit
@@ -61,9 +61,14 @@ class LHViewController: UIViewController {
 
     }
     
+    @IBOutlet weak var LHlog: UILabel!
     // Initialize submit button
     @IBAction func submitData(_ sender: Any) {
-        
+        if inputName.text == ""  {
+            LHlog.text = "Please enter name to connect"
+        } else {
+            LHlog.text = "Data Logged"
+        }
         formData["name"] = inputName.text
         
         let dateFormatter = DateFormatter()

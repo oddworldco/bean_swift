@@ -3,21 +3,7 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-<<<<<<< HEAD
-      "size" : "20x20",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "29x29",
-=======
       "filename" : "icon40x40-2.png",
->>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
       "scale" : "2x"
     },
     {
@@ -65,21 +51,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-<<<<<<< HEAD
-      "size" : "20x20",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "20x20",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "29x29",
-=======
       "filename" : "icon20x20-2.png",
->>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
       "scale" : "1x"
     },
     {
@@ -131,19 +103,9 @@
       "scale" : "2x"
     },
     {
-<<<<<<< HEAD
-      "idiom" : "ipad",
-      "size" : "83.5x83.5",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "ios-marketing",
-      "size" : "1024x1024",
-=======
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
       "filename" : "icon1024.png",
->>>>>>> f6a1c7802b2c34d90f4cf5dc9e2b8a4f40a64c43
       "scale" : "1x"
     }
   ],
